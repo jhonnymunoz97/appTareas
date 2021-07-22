@@ -11,6 +11,7 @@ const btnAll = document.getElementById('btnAll')
 const btnPending = document.getElementById('btnPending')
 const btnCompleted = document.getElementById('btnCompleted')
 const countPending = document.getElementById('count-pending')
+const anchorFiltros = document.querySelectorAll('.filtro')
 
 export const createTareaHtlm = (tarea) =>{
     const htmlTarea = `
@@ -37,7 +38,13 @@ function clearTareasHtml(){
     for(let i=divTarea.children.length-1; i>=0; i--) divTarea.removeChild(divTarea.children[i])
 }
 
-export function allTareasHtml(){
+function addClassFiler(anchor){
+    anchorFiltros.forEach(element => element.classList.remove('selected'))
+    console.log(anchor);
+    anchor.classList.add('selected');
+}
+
+function allTareasHtml(){
     clearTareasHtml()
     for(let i = 0; i<listaTareas.getListaTarea.length; i++) 
         createTareaHtlm(listaTareas.getListaTarea[i])
@@ -88,13 +95,16 @@ btnAllComplete.addEventListener('click',()=>{
 })
 
 btnAll.addEventListener('click',()=>{
+    addClassFiler(btnAll)
     allTareasHtml()           
 })
 
 btnPending.addEventListener('click',()=>{
+    addClassFiler(btnPending)
     filterTareasHtml(false)    
 })
 
 btnCompleted.addEventListener('click',()=>{
+    addClassFiler(btnCompleted)
     filterTareasHtml(true)
 })
